@@ -1,0 +1,37 @@
+.Search {
+    margin: 3rem auto 3rem;
+    width: 20%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.Input {
+    padding-left: 1rem;
+    width: 79%;
+    height: 2.6rem;
+    background-color: #f4f6fc;
+    border: transparent;
+    border-radius: 1.5rem;
+}
+
+.Button {
+    width: 20%;
+    height: 2.6rem;
+    border-radius: 1.5rem;
+    color: #f4f6fc;
+    background-color: #053d57;
+    border: transparent;
+    font-size: 1.4rem;
+}
+
+.Button:hover{
+    background-color: #f4f6fc;
+    color: #053d57;
+    border: 2px solid #053d57;
+}
+
+@media (max-width: 768px){
+    .Search{
+        width: 100%;
+    }
+}

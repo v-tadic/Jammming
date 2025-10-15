@@ -1,0 +1,21 @@
+.Title{
+    color: #737373;
+    font-weight: 300;
+    font-size: 5rem;
+    text-align: center;
+    margin-top: 3rem;
+}
+
+.YourPlaylist{
+    color: #737373;
+    font-weight: 300;
+    font-size: 2rem;
+    text-align: center;
+    margin-top: 3rem;
+}
+
+@media (max-width: 768px){
+    .Title{
+        font-size: 4rem;
+    }
+}

@@ -1,0 +1,54 @@
+.Playlist{
+    border-radius: 1.5rem;
+    width: 20%;
+    margin:1rem auto 0;
+    background-color: #053d57;
+    padding: 1rem;
+}
+
+.InputContainer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 2rem;
+}
+
+.PlayListName{
+    width: 80%;
+    height: 2.6rem;
+    background-color: #f4f6fc;
+    border: transparent;
+    border-radius: 1.5rem;
+    padding-left: 1rem;
+}
+
+.ButtonContainer{
+    margin-top: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.SaveToSpotify{
+    font-size: 2rem;
+    color: #053d57;
+    padding: 0.5rem;
+    border: 2px solid transparent;
+    border-radius: 1rem;
+}
+
+
+.SaveToSpotify:hover{
+    background-color: #053d57;
+    color: #f4f6fc;
+    border: 2px solid #f4f6fc;
+    
+}
+
+
+@media (max-width: 768px){
+    .Playlist{
+        width: 100%;
+        border-radius: 0;
+    }
+}

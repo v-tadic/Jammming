@@ -1,0 +1,31 @@
+.Track {
+    display: flex;
+    width: 100%;
+    margin: auto 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #f4f6fc;
+    padding: 1rem;
+    border-radius: 1.5rem;
+}
+
+.TrackName{
+    font-size: 1.7rem;
+    color: #737373;
+    margin-bottom: 0.3rem;
+}
+
+.TrackArtist{
+    font-size: 0.9rem;
+    color: #b4b4b4;
+}
+
+.TrackButton{
+    border: transparent;
+    background-color: #f4f6fc;
+    font-size: 3rem;
+    color: #053d57;
+    font-weight: 170;
+}
+

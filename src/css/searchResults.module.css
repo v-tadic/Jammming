@@ -1,0 +1,9 @@
+.SearchResults{
+    width: 20%;
+    margin: 0 auto;
+}
+@media (max-width: 768px){
+    .SearchResults{
+        width: 100%;
+    }
+}
