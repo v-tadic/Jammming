@@ -8,6 +8,8 @@ import Playlist from './components/playlist'
 function App() {
 
     const [playlistName, setPlaylistName] = useState('')
+    const [trackIsInPlaylist, setTrackIsInPlaylist] = useState()
+
 
     const [tracks, setTracks] = useState([
         { id: '1', name: 'Bass', artist: 'Jala Brat'},
@@ -25,6 +27,15 @@ function App() {
         const existsInArray = playlistTracks.some(oldTrack => oldTrack.name === track.name)
         if(!existsInArray) {
             setPlaylistTracks((prev) => [...prev, track]);
+            setTrackIsInPlaylist(true)
+        }
+    }
+
+    function removeTrack(track) {
+        const existsInPlaylist = playlistTracks.some(oldTrack => oldTrack.name === track.name)
+        if(existsInPlaylist) {
+            setPlaylistTracks(playlistTracks.filter(oldTrack => oldTrack.name !== track.name))
+            setTrackIsInPlaylist(false)
         }
     }
 
@@ -35,7 +46,7 @@ function App() {
       <Search></Search>
       <SearchResults resultsData={tracks} addTrackToPlaylist={addTrackToPlaylist}></SearchResults>
       <h1 className={styles.YourPlaylist}>Your Playlist:</h1>
-      <Playlist playlistName={playlistName} setPlaylistName={setPlaylistName} playlistTracks={playlistTracks}></Playlist>
+      <Playlist playlistName={playlistName} setPlaylistName={setPlaylistName} playlistTracks={playlistTracks} removeTrack={removeTrack} trackIsInPlaylist={trackIsInPlaylist}></Playlist>
     </div>
   )
 }
