@@ -1,7 +1,7 @@
 .Track {
     display: flex;
     width: 100%;
-    margin: auto 0;
+    margin: 1rem auto 0;
     display: flex;
     justify-content: space-between;
     align-items: center;

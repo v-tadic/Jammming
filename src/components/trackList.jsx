@@ -5,7 +5,7 @@ import styles from '../css/trackList.module.css'
 function TrackList( ){
     return (
         <div>
-            <Track></Track>
+
         </div>
     )
 }

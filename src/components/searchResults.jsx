@@ -1,13 +1,20 @@
-import React, {useState, useEffect} from "react";
-import Track from './track'
-import styles from '../css/searchResults.module.css'
+import React from "react";
+import Track from './track';
+import styles from '../css/searchResults.module.css';
 
-function SearchResults(){
+function SearchResults({ resultsData }) {
     return (
         <div className={styles.SearchResults}>
-            <Track></Track>
+            {resultsData.map((track, index) => (
+                <Track
+                    key={index}
+                    id={track.id}
+                    name={track.name}
+                    artist={track.artist}
+                />
+            ))}
         </div>
-    )
+    );
 }
 
-export default SearchResults
+export default SearchResults;
