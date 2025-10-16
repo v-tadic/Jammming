@@ -18,19 +18,22 @@ function App() {
     ]);
 
     const [playlistTracks, setPlaylistTracks] = useState([
-        { id: '1', name: 'Japan', artist: 'Jala Brat'},
-        { id: '2', name: 'Dogs', artist: 'Pink Floyd'},
-        { id: '3', name: 'Ramblin Man', artist: 'The Allman Brothers Band'},
-        { id: '4', name: 'Toronto', artist: 'Jala Brat'},
-        { id: '5', name: 'Entrepreneur', artist: 'Central Cee'}
+
     ]);
+
+    function addTrackToPlaylist(track) {
+        const existsInArray = playlistTracks.some(oldTrack => oldTrack.name === track.name)
+        if(!existsInArray) {
+            setPlaylistTracks((prev) => [...prev, track]);
+        }
+    }
 
 
   return (
     <div>
       <h1 className={styles.Title}>Jammming</h1>
       <Search></Search>
-      <SearchResults resultsData={tracks}></SearchResults>
+      <SearchResults resultsData={tracks} addTrackToPlaylist={addTrackToPlaylist}></SearchResults>
       <h1 className={styles.YourPlaylist}>Your Playlist:</h1>
       <Playlist playlistName={playlistName} setPlaylistName={setPlaylistName} playlistTracks={playlistTracks}></Playlist>
     </div>
