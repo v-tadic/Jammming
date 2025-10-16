@@ -2,9 +2,7 @@ import React, {useState, useEffect} from "react";
 import TrackList from "./trackList";
 import styles from '../css/playlist.module.css'
 
-function Playlist(){
-
-    const [playlistName, setPlaylistName] = useState('')
+function Playlist( {setPlaylistName, playlistName} ){
 
     function handleChange(e){
         setPlaylistName(e.target.value)
@@ -12,7 +10,6 @@ function Playlist(){
 
     function handleSubmit(e){
         e.preventDefault()
-        console.log(playlistName)
     }
 
     return (
