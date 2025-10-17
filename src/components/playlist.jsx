@@ -2,13 +2,14 @@ import React, {useState, useEffect} from "react";
 import TrackList from "./trackList";
 import styles from '../css/playlist.module.css'
 
-function Playlist( {setPlaylistName, playlistName, playlistTracks, removeTrack, trackIsInPlaylist} ){
+function Playlist( {setPlaylistName, playlistName, playlistTracks, removeTrack, trackIsInPlaylist, addPlaylistToUserAccount} ){
 
     function handleChange(e){
         setPlaylistName(e.target.value)
     }
 
     function handleSubmit(e){
+        addPlaylistToUserAccount()
         e.preventDefault()
     }
 
