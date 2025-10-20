@@ -37,23 +37,25 @@ function App() {
 
     async function ObtainCodeChallenge() {
         const codeVerifier  = generateRandomString(64);
-        window.localStorage.setItem('codeVerifier', codeVerifier);
+        window.localStorage.setItem('code_verifier', codeVerifier);
         const hashed = await sha256(codeVerifier)
         const codeChallenge = base64encode(hashed);
         window.localStorage.setItem('codeChallenge', codeChallenge);
     }
 
-    async function RequestUserAuthorization(){
-        await ObtainCodeChallenge()
+    async function SendTheUserToSpotify(){
+        await ObtainCodeChallenge();
+
         const scope = 'user-read-private user-read-email';
         const authUrl = new URL("https://accounts.spotify.com/authorize")
+
 
         const params =  {
             response_type: 'code',
             client_id: clientId,
             scope,
             code_challenge_method: 'S256',
-            code_challenge: window.localStorage.getItem('code_challenge'),
+            code_challenge: window.localStorage.getItem('codeChallenge'),
             redirect_uri: redirectUri,
         }
 
@@ -61,18 +63,50 @@ function App() {
         window.location.href = authUrl.toString();
     }
 
-    async function HandleRedirect() {
+    const getToken = async code => {
+
+        // stored in the previous step
+        const codeVerifier = localStorage.getItem('code_verifier');
+
+        const url = "https://accounts.spotify.com/api/token";
+        const payload = {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+            },
+            body: new URLSearchParams({
+                client_id: clientId,
+                grant_type: 'authorization_code',
+                code,
+                redirect_uri: redirectUri,
+                code_verifier: codeVerifier,
+            }),
+        }
+
+        const body = await fetch(url, payload);
+        const response = await body.json();
+
+        localStorage.setItem('access_token', response.access_token);
+    }
+
+    function GetCode() {
         const urlParams = new URLSearchParams(window.location.search);
         let code = urlParams.get('code');
 
-        if (code) {
-            window.localStorage.setItem('code', code);
+        if (code && !localStorage.getItem('code')) {
+            localStorage.setItem('code', code);
+            clearInterval(codeInterval);
+            getToken(code)
+
         }
     }
 
-    if (new URLSearchParams(window.location.search).has('code')) {
-        HandleRedirect();
-    }
+
+    const codeInterval = setInterval(() => {
+        GetCode();
+    }, 1000);
+
+
 
     function addTrackToPlaylist(track) {
         const existsInArray = playlistTracks.some((oldTrack) => oldTrack.name === track.name);
@@ -98,7 +132,7 @@ function App() {
     return (
         <div>
             <h1 className={styles.Title}>Jammming</h1>
-            <button onClick={RequestUserAuthorization}>Log In With Spotify</button>
+            <button onClick={SendTheUserToSpotify}>Log In With Spotify</button>
             <Search></Search>
             <SearchResults tracks={tracks} addTrackToPlaylist={addTrackToPlaylist}></SearchResults>
             <h1 className={styles.YourPlaylist}>Your Playlist:</h1>
