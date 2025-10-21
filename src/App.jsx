@@ -47,7 +47,7 @@ function App() {
     async function SendTheUserToSpotify(){
         await ObtainCodeChallenge();
 
-        const scope = 'user-read-private user-read-email';
+        const scope = 'user-read-private user-read-email playlist-read-private playlist-modify-private playlist-modify-public playlist-read-collaborative';
         const authUrl = new URL("https://accounts.spotify.com/authorize")
 
 
@@ -91,7 +91,7 @@ function App() {
         setUserLoggedIn(true);
     }
 
-    function GetCode() {
+function GetCode() {
         const urlParams = new URLSearchParams(window.location.search);
         let code = urlParams.get('code');
 
