@@ -11,6 +11,7 @@ function App() {
     const [trackIsInPlaylist, setTrackIsInPlaylist] = useState();
     const [clientId, setClientId] = useState('e01a6d79177d4951a630fc9014f5c482');
     const [redirectUri, setRedirectUri] = useState('http://127.0.0.1:5173');
+    const [userLoggedIn, setUserLoggedIn] = useState(false);
     const [tracks, setTracks] = useState([
 
     ]);
@@ -87,6 +88,7 @@ function App() {
         const response = await body.json();
 
         localStorage.setItem('access_token', response.access_token);
+        setUserLoggedIn(true);
     }
 
     function GetCode() {
@@ -95,16 +97,14 @@ function App() {
 
         if (code && !localStorage.getItem('code')) {
             localStorage.setItem('code', code);
-            clearInterval(codeInterval);
             getToken(code)
-
         }
     }
 
 
-    const codeInterval = setInterval(() => {
-        GetCode();
-    }, 1000);
+    useEffect(() => {
+        GetCode()
+    }, [])
 
 
 
