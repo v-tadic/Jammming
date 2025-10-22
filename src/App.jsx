@@ -132,7 +132,7 @@ function GetCode() {
     return (
         <div>
             <h1 className={styles.Title}>Jammming</h1>
-            <button onClick={SendTheUserToSpotify}>Log In With Spotify</button>
+            <button className={styles.LogInButton} onClick={SendTheUserToSpotify}>Log In With Spotify</button>
             <Search></Search>
             <SearchResults tracks={tracks} addTrackToPlaylist={addTrackToPlaylist}></SearchResults>
             <h1 className={styles.YourPlaylist}>Your Playlist:</h1>

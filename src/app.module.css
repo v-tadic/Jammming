@@ -14,6 +14,26 @@
     margin-top: 3rem;
 }
 
+.LogInButton {
+    width: 9rem;
+    height: 2rem;
+    color: white;
+    background-color: #053d57;
+    font-size: 0.9rem;
+    border: transparent;
+    border-radius: 1rem;
+    font-weight: 400;
+    display: block;
+    margin: 1rem auto;
+}
+
+.LogInButton:hover {
+    background-color: white;
+    border:2px solid #053d57;
+    color: #053d57;
+}
+
+
 @media (max-width: 768px){
     .Title{
         font-size: 4rem;
