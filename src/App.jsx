@@ -4,7 +4,6 @@ import Search from './components/search';
 import Track from './components/track';
 import SearchResults from './components/searchResults';
 import Playlist from './components/playlist';
-import playlist from "./components/playlist";
 
 function App() {
     const [playlistName, setPlaylistName] = useState('');
@@ -12,6 +11,10 @@ function App() {
     const [clientId, setClientId] = useState('e01a6d79177d4951a630fc9014f5c482');
     const [redirectUri, setRedirectUri] = useState('http://127.0.0.1:5173');
     const [userLoggedIn, setUserLoggedIn] = useState(false);
+
+    const [search, setSearch] = useState('')
+    const [data, setData] = useState([]);
+
     const [tracks, setTracks] = useState([
 
     ]);
@@ -106,6 +109,27 @@ function GetCode() {
         GetCode()
     }, [])
 
+    async function getSearchData(){
+        let token = window.localStorage.getItem("access_token");
+        try {
+            let response = await fetch(`https://api.spotify.com/v1/search?q=${encodeURIComponent(search)}&type=track&limit=1`, {
+                method: 'GET',
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
+            })
+            const data = await response.json()
+            if (response.ok) {
+                window.localStorage.setItem('data', JSON.stringify(data))
+                console.log(data)
+                setData(data)
+            } else {
+                throw new Error('Something went wrong')
+            }
+        } catch (e) {
+            console.error(e)
+        }
+    }
 
 
     function addTrackToPlaylist(track) {
@@ -133,7 +157,7 @@ function GetCode() {
         <div>
             <h1 className={styles.Title}>Jammming</h1>
             <button className={styles.LogInButton} onClick={SendTheUserToSpotify}>Log In With Spotify</button>
-            <Search></Search>
+            <Search setSearch={setSearch} search={search} setData={setData} getSearchData={getSearchData}></Search>
             <SearchResults tracks={tracks} addTrackToPlaylist={addTrackToPlaylist}></SearchResults>
             <h1 className={styles.YourPlaylist}>Your Playlist:</h1>
             <Playlist

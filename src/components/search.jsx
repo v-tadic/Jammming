@@ -1,17 +1,16 @@
 import React, {useState, useEffect} from "react";
 import styles from '../css/search.module.css'
 
-function Search(){
-
-    const [search, setSearch] = useState('')
+function Search({search, setSearch, setData, getSearchData}) {
 
     function updateSearch(e){
         setSearch(e.target.value)
     }
 
-    function handleSubmit(e){
+    async function handleSubmit(e){
         e.preventDefault()
         console.log('submited')
+        getSearchData()
     }
 
     return (
