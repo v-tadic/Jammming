@@ -91,7 +91,7 @@ function App() {
         const response = await body.json();
 
         localStorage.setItem('access_token', response.access_token);
-        setUserLoggedIn(true);
+        setUserLoggedIn(true)
     }
 
 function GetCode() {
@@ -107,6 +107,10 @@ function GetCode() {
 
     useEffect(() => {
         GetCode()
+        const accessToken = localStorage.getItem('access_token');
+        if (accessToken) {
+            setUserLoggedIn(true);
+        }
     }, [])
 
     async function getSearchData(){
@@ -123,6 +127,15 @@ function GetCode() {
                 window.localStorage.setItem('data', JSON.stringify(data))
                 console.log(data)
                 setData(data)
+                setTracks([])
+                const trackObject = {
+                    key: null,
+                    name: data.tracks.items[0].name,
+                    uri: data.tracks.items[0].uri,
+                    artist: data.tracks.items[0].artists[0].name
+                }
+                setTracks((prev) => [...prev, trackObject]);
+
             } else {
                 throw new Error('Something went wrong')
             }
@@ -156,6 +169,7 @@ function GetCode() {
     return (
         <div>
             <h1 className={styles.Title}>Jammming</h1>
+            <h3 className={styles.LogInText}>{userLoggedIn === false ? 'Please log in with your Spotify account' : 'Thank you for logging in'}</h3>
             <button className={styles.LogInButton} onClick={SendTheUserToSpotify}>Log In With Spotify</button>
             <Search setSearch={setSearch} search={search} setData={setData} getSearchData={getSearchData}></Search>
             <SearchResults tracks={tracks} addTrackToPlaylist={addTrackToPlaylist}></SearchResults>

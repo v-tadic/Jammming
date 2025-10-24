@@ -9,7 +9,6 @@ function SearchResults({ tracks, addTrackToPlaylist}) {
                 <Track addTrackToPlaylist={addTrackToPlaylist}
                     key={index}
                     uri={track.uri}
-                    id={track.id}
                     name={track.name}
                     artist={track.artist}
                 />

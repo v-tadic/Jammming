@@ -8,8 +8,7 @@ function TrackList({ playlistTracks, removeTrack } ) {
             {playlistTracks.map(track => (
                 <Track
                     uri={track.uri}
-                    key={track.id}
-                    id={track.id}
+                    key={index}
                     name={track.name}
                     artist={track.artist}
                     removeTrack={removeTrack}

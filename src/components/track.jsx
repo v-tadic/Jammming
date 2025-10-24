@@ -2,7 +2,7 @@ import React, {useState, useEffect} from "react";
 import styles from '../css/track.module.css'
 
 
-function Track({ id, name, artist, uri, addTrackToPlaylist, removeTrack, trackIsInPlaylist }) {
+function Track({name, artist, uri, addTrackToPlaylist, removeTrack, trackIsInPlaylist }) {
     if (trackIsInPlaylist) {
         return (
             <div className={styles.Track}>
@@ -10,7 +10,7 @@ function Track({ id, name, artist, uri, addTrackToPlaylist, removeTrack, trackIs
                     <p className={styles.TrackName}>{name}</p>
                     <p className={styles.TrackArtist}>{artist}</p>
                 </div>
-                <button className={styles.TrackButton} onClick={() => removeTrack({ id, name, artist, uri })}>-</button>
+                <button className={styles.TrackButton} onClick={() => removeTrack({name, artist, uri })}>-</button>
             </div>
         );
     } else {
@@ -20,7 +20,7 @@ function Track({ id, name, artist, uri, addTrackToPlaylist, removeTrack, trackIs
                     <p className={styles.TrackName}>{name}</p>
                     <p className={styles.TrackArtist}>{artist}</p>
                 </div>
-                <button className={styles.TrackButton} onClick={() => addTrackToPlaylist({ id, name, artist, uri })}>+</button>
+                <button className={styles.TrackButton} onClick={() => addTrackToPlaylist({name, artist, uri })}>+</button>
             </div>
         );
     }
