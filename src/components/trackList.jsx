@@ -5,7 +5,7 @@ import styles from '../css/trackList.module.css'
 function TrackList({ playlistTracks, removeTrack } ) {
     return (
         <div>
-            {playlistTracks.map(track => (
+            {playlistTracks.map((track, index) => (
                 <Track
                     uri={track.uri}
                     key={index}

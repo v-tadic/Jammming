@@ -11,6 +11,7 @@ function App() {
     const [clientId, setClientId] = useState('e01a6d79177d4951a630fc9014f5c482');
     const [redirectUri, setRedirectUri] = useState('http://127.0.0.1:5173');
     const [userLoggedIn, setUserLoggedIn] = useState(false);
+    const [totalTime, setTotalTime] = useState();
 
     const [search, setSearch] = useState('')
     const [data, setData] = useState([]);
@@ -109,7 +110,11 @@ function GetCode() {
         GetCode()
         const accessToken = localStorage.getItem('access_token');
         if (accessToken) {
-            setUserLoggedIn(true);
+            setUserLoggedIn(true)
+            setTimeout(function () {
+                setUserLoggedIn(false)
+                localStorage.clear()
+            }, 3600000)
         }
     }, [])
 
