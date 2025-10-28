@@ -13,6 +13,9 @@ function App() {
     const [userLoggedIn, setUserLoggedIn] = useState(false);
     const [totalTime, setTotalTime] = useState();
 
+    const [userID, setUserID] = useState('31e2itd6gd35lhwx5yrvoixkynb4');
+    const [privatePlaylist, setPrivatePlaylist] = useState(false);
+
     const [search, setSearch] = useState('')
     const [data, setData] = useState([]);
 
@@ -21,6 +24,8 @@ function App() {
     ]);
 
     const [playlistTracks, setPlaylistTracks] = useState([]);
+
+
 
     //Funkcije za generisanje code verifier i code challenge
     const generateRandomString = (length) => {
@@ -120,6 +125,9 @@ function GetCode() {
 
     async function getSearchData(){
         let token = window.localStorage.getItem("access_token");
+        if(!search){
+            return null
+        }
         try {
             let response = await fetch(`https://api.spotify.com/v1/search?q=${encodeURIComponent(search)}&type=track&limit=1`, {
                 method: 'GET',
@@ -164,9 +172,38 @@ function GetCode() {
         }
     }
 
-    function addPlaylistToUserAccount() {
+    async function addPlaylistToUserAccount() {
         let uriArray = playlistTracks.map((track) => track.uri);
         console.log(uriArray);
+        let accessToken = window.localStorage.getItem('access_token');
+
+        if(!accessToken) {
+            throw new Error('No access token');
+        }
+
+        try{
+            let response = await fetch(`https://api.spotify.com/v1/users/${userID}/playlists`, {
+                method: 'POST',
+                headers: {
+                    'Authorization': `Bearer ${accessToken}`,
+                },
+                body: JSON.stringify({
+                    name: playlistName,
+                    public: privatePlaylist,
+                    description: 'Test'
+                })
+            })
+            if (!response.ok) throw new Error('Something went wrong')
+            const data = await response.json()
+            const PlaylistID = data.id
+            console.log(PlaylistID)
+            console.log(data)
+
+
+
+        } catch (e) {
+            console.log(e)
+        }
         setPlaylistTracks([]);
         setPlaylistName('');
     }
@@ -186,6 +223,8 @@ function GetCode() {
                 playlistTracks={playlistTracks}
                 removeTrack={removeTrack}
                 trackIsInPlaylist={trackIsInPlaylist}
+                setPrivatePlaylist={setPrivatePlaylist}
+                privatePlaylist={privatePlaylist}
             />
         </div>
     );

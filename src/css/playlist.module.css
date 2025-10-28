@@ -22,6 +22,23 @@
     padding-left: 1rem;
 }
 
+.Private{
+    display: flex;
+    align-items: center;
+}
+
+.Private label{
+    color: white;
+    margin-right: 0.5rem;
+}
+
+.Private input{
+    width: 1.5rem;
+    height: 1.5rem;
+    border: transparent;
+}
+
+
 .ButtonContainer{
     margin-top: 2rem;
     display: flex;
