@@ -206,7 +206,7 @@ function GetCode() {
                     uris: uriArray
                 })
             })
-            if (!addSongToPlaylist.ok) throw new Error('Something went wrong in first function')
+            if (!addSongToPlaylist.ok) throw new Error('Something went wrong in second function')
             const returnData = await addSongToPlaylist.json()
             console.log(returnData)
 
