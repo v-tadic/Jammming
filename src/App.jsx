@@ -193,13 +193,22 @@ function GetCode() {
                     description: 'Test'
                 })
             })
-            if (!response.ok) throw new Error('Something went wrong')
+            if (!response.ok) throw new Error('Something went wrong in first function')
             const data = await response.json()
             const PlaylistID = data.id
-            console.log(PlaylistID)
-            console.log(data)
 
-
+            let addSongToPlaylist = await fetch(`https://api.spotify.com/v1/playlists/${PlaylistID}/tracks`, {
+                method: 'POST',
+                headers: {
+                    'Authorization': `Bearer ${accessToken}`,
+                },
+                body: JSON.stringify({
+                    uris: uriArray
+                })
+            })
+            if (!addSongToPlaylist.ok) throw new Error('Something went wrong in first function')
+            const returnData = await addSongToPlaylist.json()
+            console.log(returnData)
 
         } catch (e) {
             console.log(e)
