@@ -8,12 +8,12 @@ import Playlist from './components/playlist';
 function App() {
     const [playlistName, setPlaylistName] = useState('');
     const [trackIsInPlaylist, setTrackIsInPlaylist] = useState();
-    const [clientId, setClientId] = useState('e01a6d79177d4951a630fc9014f5c482');
+    const [clientId, setClientId] = useState('2');
     const [redirectUri, setRedirectUri] = useState('http://127.0.0.1:5173');
     const [userLoggedIn, setUserLoggedIn] = useState(false);
     const [totalTime, setTotalTime] = useState();
 
-    const [userID, setUserID] = useState('31e2itd6gd35lhwx5yrvoixkynb4');
+    const [userID, setUserID] = useState('');
     const [privatePlaylist, setPrivatePlaylist] = useState(false);
 
     const [search, setSearch] = useState('')
